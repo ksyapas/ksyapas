@@ -1,7 +1,10 @@
 from sys import*
 from math import*
 
-kof=10000
+kof=-5
+
+if kof<0:
+    kof=abs(kof)
 
 def pokazat_spravku():
     """Выводит справку о назначении программы и способах её запуска."""
@@ -10,10 +13,10 @@ def pokazat_spravku():
     print("mathtool — решение уравнений вида A*x^2 + B*x + C = 0")
     print()
     print("Использование:")
-    print("    python mathtool.py                         вывод справки")
-    print("    python mathtool.py --help                   вывод справки")
-    print("    python mathtool.py solve                    ввод коэффициентов с клавиатуры")
-    print("    python mathtool.py solve -a 1 -b -3 -c 2    решение с заданными коэффициентами")
+    print("    python laba_1.py                         вывод справки")
+    print("    python laba_1.py --help                   вывод справки")
+    print("    python laba_1.py solve                    ввод коэффициентов с клавиатуры")
+    print("    python laba_1.py solve -a 1 -b -3 -c 2    решение с заданными коэффициентами")
     print()
     print("Коэффициенты A, B, C — целые числа, по модулю не превышающие 10000.")
 #если аргументов нет или введена команда --help
@@ -57,7 +60,7 @@ if len(argv)>1 and argv[1]=='solve':
 
     #Проверяем, не превышают ли  коэффициенты допустимое значение
     if abs(A)>kof or abs(B)>kof or abs(C)>kof:
-        print('Ошибка: значение вне допустимого диапазона', file=stderr)
+        print(f'Ошибка: значение вне допустимого диапазона от {kof*-1} до {kof*1}', file=stderr)
         exit(1)
 
     #Если А не равен нулю, уравнение является квадратным
