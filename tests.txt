@@ -1,0 +1,397 @@
+ТЕСТ 1
+Команда: python laba_2.py stats --input number.txt
+stdin: <пусто>
+stdout:
+Количество: 3
+Сумма: 10.000
+Среднее арифметическое: 3.333
+Сумма квадратов: 42.000
+Среднее квадратическое: 3.742
+Дисперсия: 2.889
+СКО: 1.700
+Стандартное отклонение: 2.082
+Наименьшее: 1.000
+Наибольшее: 5.000
+Положительных: 3
+Отрицательных: 0
+stderr: <пусто>
+Код возврата: 0
+
+ТЕСТ 2
+Команда: python laba_2.py stats --input number.txt
+stdin: <пусто>
+stdout:
+НУЖНО ПРОВЕРИТЬ
+stderr: <пусто>
+Код возврата: 0
+
+ТЕСТ 3
+Команда: "4 1 5" | python laba_2.py stats
+stdin: 4 1 5
+stdout:
+Количество: 3
+Сумма: 10.000
+Среднее арифметическое: 3.333
+Сумма квадратов: 42.000
+Среднее квадратическое: 3.742
+Дисперсия: 2.889
+СКО: 1.700
+Стандартное отклонение: 2.082
+Наименьшее: 1.000
+Наибольшее: 5.000
+Положительных: 3
+Отрицательных: 0
+stderr: <пусто>
+Код возврата: 0
+
+ТЕСТ 4
+Команда: "7" | python laba_2.py stats
+stdin: 7
+stdout:
+Количество: 1
+Стандартное отклонение: НЕ СУЩЕСТВУЕТ
+НУЖНО ПРОВЕРИТЬ ОСТАЛЬНЫЕ ПОКАЗАТЕЛИ
+stderr: <пусто>
+Код возврата: 0
+
+ТЕСТ 5
+Команда: "" | python laba_2.py stats
+stdin: <пусто>
+stdout:
+НУЖНО ПРОВЕРИТЬ
+stderr: <пусто>
+Код возврата: 1
+
+ТЕСТ 6
+Команда: "1 2 abc" | python laba_2.py stats
+stdin: 1 2 abc
+stdout:
+НУЖНО ПРОВЕРИТЬ
+stderr: <пусто>
+Код возврата: 1
+
+ТЕСТ 7
+Команда: python laba_2.py stats --input missing.txt
+stdin: <пусто>
+stdout:
+НУЖНО ПРОВЕРИТЬ
+stderr: <пусто>
+Код возврата: 1
+
+ТЕСТ 8
+Команда: python laba_2.py series --func sqplus --terms 1
+stdin: <пусто>
+stdout:
+Ряд: sqplus
+Формула: S = 1/(1^2+1) - 1/(2^2+1) + ...
+Сумма: 0.5000
+stderr: <пусто>
+Код возврата: 0
+
+ТЕСТ 9
+Команда: python laba_2.py series --func sqplus --terms 6
+stdin: <пусто>
+stdout:
+Ряд: sqplus
+Формула: S = 1/(1^2+1) - 1/(2^2+1) + ...
+Сумма: НУЖНО ПРОВЕРИТЬ
+stderr: <пусто>
+Код возврата: 0
+
+ТЕСТ 10
+Команда: python laba_2.py series --func sqplus --eps 0.0001
+stdin: <пусто>
+stdout:
+Ряд: sqplus
+Формула: S = 1/(1^2+1) - 1/(2^2+1) + ...
+Сумма: 0.3639
+stderr: <пусто>
+Код возврата: 0
+
+ТЕСТ 11
+Команда: python laba_2.py series --func third --eps 0.0001
+stdin: <пусто>
+stdout:
+Ряд: third
+Формула: S = 1/3 - 1/6 + 1/9 - ...
+Сумма: 0.2310
+stderr: <пусто>
+Код возврата: 0
+
+ТЕСТ 12
+Команда: python laba_2.py series --func sqplus --terms 10000
+stdin: <пусто>
+stdout:
+НУЖНО ПРОВЕРИТЬ
+stderr: <пусто>
+Код возврата: 0
+
+ТЕСТ 13
+Команда: python laba_2.py series --func sqplus --terms 10001
+stdin: <пусто>
+stdout:
+Ошибка: Количество слагаемых должно быть от 1 до 10000
+stderr: <пусто>
+Код возврата: 1
+
+ТЕСТ 14
+Команда: python laba_2.py series --func sqplus --eps 0.001
+stdin: <пусто>
+stdout:
+Ошибка: Точность должна быть больше 0 и не превышать 0.0001
+stderr: <пусто>
+Код возврата: 1
+
+ТЕСТ 15
+Команда: python laba_2.py series --func sqplus --terms 5 --eps 0.0001
+stdin: <пусто>
+stdout:
+НУЖНО ПРОВЕРИТЬ
+stderr: <пусто>
+Код возврата: 2
+
+ТЕСТ 16
+Команда: python laba_2.py integrate --func ratio --from 0 --to 20 --steps 10
+stdin: <пусто>
+stdout:
+Функция: ratio
+Формула: F(x) = x / (x + 1)
+Интеграл: 15.7335
+stderr: <пусто>
+Код возврата: 0
+
+ТЕСТ 17
+Команда: python laba_2.py integrate --func ratio --from 0 --to 20 --steps 1000
+stdin: <пусто>
+stdout:
+Функция: ratio
+Формула: F(x) = x / (x + 1)
+Интеграл: 16.9459
+stderr: <пусто>
+Код возврата: 0
+
+ТЕСТ 18
+Команда: python laba_2.py integrate --func ratio --from 0 --to 20 --steps 10000
+stdin: <пусто>
+stdout:
+Функция: ratio
+Формула: F(x) = x / (x + 1)
+Интеграл: 16.9545
+stderr: <пусто>
+Код возврата: 0
+
+ТЕСТ 19
+Команда: python laba_2.py integrate --func ratio --from 5 --to 10 --steps 1000
+stdin: <пусто>
+stdout:
+НУЖНО ПРОВЕРИТЬ
+stderr: <пусто>
+Код возврата: 0
+
+ТЕСТ 20
+Команда: python laba_2.py integrate --func root --from -4.9 --to 4.9 --steps 1000
+stdin: <пусто>
+stdout:
+НУЖНО ПРОВЕРИТЬ
+stderr: <пусто>
+Код возврата: 0
+
+ТЕСТ 21
+Команда: python laba_2.py integrate --func root --from -5 --to 5 --steps 100
+stdin: <пусто>
+stdout:
+Ошибка: Пределы выходят за допустимый промежуток
+stderr: <пусто>
+Код возврата: 1
+
+ТЕСТ 22
+Команда: python laba_2.py integrate --func ratio --from 4 --to 1 --steps 100
+stdin: <пусто>
+stdout:
+Ошибка: Нижний предел должен быть меньше верхнего
+stderr: <пусто>
+Код возврата: 1
+
+ТЕСТ 23
+Команда: python laba_2.py integrate --func ratio --from 0 --to 20 --steps 100001
+stdin: <пусто>
+stdout:
+Ошибка: Количество шагов должно быть от 1 до 100000
+stderr: <пусто>
+Код возврата: 1
+
+ТЕСТ 24
+Команда: python laba_2.py solve -a 1 -b -3 -c 2
+stdin: <пусто>
+stdout:
+НУЖНО ПРОВЕРИТЬ
+stderr: <пусто>
+Код возврата: 0
+
+ТЕСТ 25
+Команда: python laba_2.py solve -c 2 -a 1 -b -3
+stdin: <пусто>
+stdout:
+НУЖНО ПРОВЕРИТЬ
+stderr: <пусто>
+Код возврата: 0
+
+ТЕСТ 26
+Команда: python laba_2.py solve -a 1 -b -2 -c 1
+stdin: <пусто>
+stdout:
+НУЖНО ПРОВЕРИТЬ
+stderr: <пусто>
+Код возврата: 0
+
+ТЕСТ 27
+Команда: python laba_2.py solve -a 1 -b 0 -c 5
+stdin: <пусто>
+stdout:
+НУЖНО ПРОВЕРИТЬ
+stderr: <пусто>
+Код возврата: 0
+
+ТЕСТ 28
+Команда: python laba_2.py solve -a 0 -b 2 -c -5
+stdin: <пусто>
+stdout:
+НУЖНО ПРОВЕРИТЬ
+stderr: <пусто>
+Код возврата: 0
+
+ТЕСТ 29
+Команда: python laba_2.py solve -a 0 -b 0 -c 7
+stdin: <пусто>
+stdout:
+НУЖНО ПРОВЕРИТЬ
+stderr: <пусто>
+Код возврата: 1
+
+ТЕСТ 30
+Команда: python laba_2.py solve -a 50000 -b 2 -c 1
+stdin: <пусто>
+stdout:
+НУЖНО ПРОВЕРИТЬ
+stderr: <пусто>
+Код возврата: 1
+
+ТЕСТ 31
+Команда: python laba_2.py solve -a abc -b 2 -c 1
+stdin: <пусто>
+stdout:
+НУЖНО ПРОВЕРИТЬ
+stderr:
+НУЖНО ПРОВЕРИТЬ
+Код возврата: 2
+
+ТЕСТ 32
+Команда: python laba_2.py solve -x 1
+stdin: <пусто>
+stdout:
+НУЖНО ПРОВЕРИТЬ
+stderr:
+НУЖНО ПРОВЕРИТЬ
+Код возврата: 2
+
+ТЕСТ 33
+Команда: python laba_2.py solve
+stdin:
+1
+-3
+2
+stdout:
+НУЖНО ПРОВЕРИТЬ
+stderr: <пусто>
+Код возврата: 0
+
+ТЕСТ 34
+Команда: python laba_2.py solve
+stdin:
+x
+stdout:
+НУЖНО ПРОВЕРИТЬ
+stderr: <пусто>
+Код возврата: 1
+
+ТЕСТ 35
+Команда: python laba_2.py solve -a 1
+stdin: <пусто>
+stdout:
+НУЖНО ПРОВЕРИТЬ
+stderr: <пусто>
+Код возврата: 1
+
+ТЕСТ 36
+Команда: python laba_2.py
+stdin: <пусто>
+stdout:
+НУЖНО ПРОВЕРИТЬ
+stderr: <пусто>
+Код возврата: 0
+
+ТЕСТ 37
+Команда: python laba_2.py --help
+stdin: <пусто>
+stdout:
+НУЖНО ПРОВЕРИТЬ
+stderr: <пусто>
+Код возврата: 0
+
+ТЕСТ 38
+Команда: python laba_2.py series --help
+stdin: <пусто>
+stdout:
+НУЖНО ПРОВЕРИТЬ
+stderr: <пусто>
+Код возврата: 0
+
+ТЕСТ 39
+Команда: python laba_2.py badcmd
+stdin: <пусто>
+stdout:
+НУЖНО ПРОВЕРИТЬ
+stderr:
+НУЖНО ПРОВЕРИТЬ
+Код возврата: 2
+
+ТЕСТ 40
+Команда: python laba_2.py series --func sqplus --terms 0
+stdin: <пусто>
+stdout:
+Ошибка: Количество слагаемых должно быть от 1 до 10000
+stderr: <пусто>
+Код возврата: 1
+
+ТЕСТ 41
+Команда: python laba_2.py series --func sqplus --eps 0
+stdin: <пусто>
+stdout:
+Ошибка: Точность должна быть больше 0 и не превышать 0.0001
+stderr: <пусто>
+Код возврата: 1
+
+ТЕСТ 42
+Команда: python laba_2.py series --func third --eps 0.000001
+stdin: <пусто>
+stdout:
+Ошибка: Заданная точность не достигнута
+stderr: <пусто>
+Код возврата: 1
+
+ТЕСТ 43
+Команда: python laba_2.py series --func sqplus
+stdin: <пусто>
+stdout:
+НУЖНО ПРОВЕРИТЬ
+stderr:
+НУЖНО ПРОВЕРИТЬ
+Код возврата: 2
+
+ТЕСТ 44
+Команда: python laba_2.py integrate --func ratio --from 0 --to 20 --steps 0
+stdin: <пусто>
+stdout:
+Ошибка: Количество шагов должно быть от 1 до 100000
+stderr: <пусто>
+Код возврата: 1

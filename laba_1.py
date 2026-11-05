@@ -1,7 +1,7 @@
 from sys import*
 from math import*
 
-kof=-5
+kof=10000
 
 if kof<0:
     kof=abs(kof)
