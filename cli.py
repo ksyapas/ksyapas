@@ -93,8 +93,16 @@ def main():
                 with open(args.input, "r", encoding="utf-8") as source:
                     numbers = stats.read_numbers(source)
             else:
-                import sys
-                numbers = stats.read_numbers(sys.stdin)
+                numbers=[]
+                while True:
+                    line=input()
+                    if line=='':
+                        break
+                    for i in line.split():
+                        numbers.append(int(i))
+                    
+                # import sys
+                # numbers = stats.read_numbers(sys.stdin)
 
             print_statistics = stats.calculate_all(numbers)
 

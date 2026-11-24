@@ -1,5 +1,6 @@
 #Численное интегрирование
 import math
+from calc.equation import solve_equation
 
 MAX_STEPS = 100000
 DIGITS = 4
@@ -10,7 +11,14 @@ def F_ratio(x):
 def F_root(x):
     return (x * x + 1) ** 0.5
 
-FORMULAS = {"ratio": (F_ratio,"F(x) = x / (x + 1)",0,20,False),"root": (F_root,"F(x) = sqrt(x^2 + 1)",-5,5,True)}
+def F_new(x):
+    return -x**2+x+3
+
+x=solve_equation(-1, 1, 3)
+
+FORMULAS = {"ratio": (F_ratio,"F(x) = x / (x + 1)",0,20,False),
+            "root": (F_root,"F(x) = sqrt(x^2 + 1)",-5,5,True),
+            "new": (F_new, "F(x)=-x**2+x+3", x["Корни"][0], x["Корни"][1], True)}
 
 def calculate_integral(function, a, b, steps):
     if not math.isfinite(a) or not math.isfinite(b):

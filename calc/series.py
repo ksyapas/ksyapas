@@ -24,6 +24,9 @@ def term_sqplus(n):
 def term_third(n):
     return znak(n) / (3 * n)
 
+def term_new(n):
+    return znak(n)/(n**3-12)
+
 
 FORMULAS = {
     "sqplus": (
@@ -33,6 +36,10 @@ FORMULAS = {
     "third": (
         term_third,
         "S = 1/3 - 1/6 + 1/9 - ..."
+    ),
+    "new": (
+        term_new, 
+        "S=1/1**3-12+..."
     )
 }
 
