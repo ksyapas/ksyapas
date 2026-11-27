@@ -30,18 +30,15 @@ def is_sorted(values):
             return False
     return True
 
-def binary_search(values, target):
-    #Ищет элемент в отсортированном списке
-    if not is_sorted(values):
-        raise ValueError("Список должен быть отсортирован по возрастанию")
-    left=0
-    right=len(values)-1
-    while left<=right:
-        middle=(left+right)//2
-        if values[middle]==target:
+def binary_search(numbers, value):
+    left = 0
+    right = len(numbers) - 1
+    while left <= right:
+        middle = (left + right) // 2
+        if numbers[middle] == value:
             return middle
-        if values[middle]<target:
-            left=middle+1
+        elif numbers[middle] < value:
+            left = middle + 1
         else:
-            right=middle-1
+            right = middle - 1
     return None

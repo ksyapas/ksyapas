@@ -1,7 +1,7 @@
-#подключить инструмент для обработки командной строки
 
 import argparse
 import sys
+import time
 
 from calc import equation
 from calc import stats
@@ -12,8 +12,9 @@ from calc.arrays import MIN_VALUE, MAX_VALUE, MAX_COUNT
 from calc.arrays import binary_search, generate_array
 from calc.sorting import METHODS
 
+
 def read_array(path=None):
-#Читает массив целых чисел из файла или с клавиатуры
+    """Читает массив целых чисел из файла или с клавиатуры"""
     if path:
         with open(path, encoding="utf-8-sig") as file:
             text = file.read()
@@ -24,64 +25,108 @@ def read_array(path=None):
                 line = input()
             except EOFError:
                 break
+
             if not line.strip():
                 break
+
             lines.append(line)
+
         text = " ".join(lines)
+
     text = text.replace(",", " ")
     words = text.split()
+
     numbers = []
     for word in words:
         numbers.append(int(word))
+
     if not 1 <= len(numbers) <= MAX_COUNT:
         raise ValueError("Количество элементов вне диапазона 1..1000000")
+
     for number in numbers:
         if not MIN_VALUE <= number <= MAX_VALUE:
             raise ValueError("Число вне диапазона -100..100")
+
     return numbers
 
-def write_array(values, path):
+
+def write_array(values, path, title="Сгенерированный массив"):
     """Записывает массив целых чисел в файл"""
     if path is None:
-        print("Отсортированный массив:")
+        print(title + ":")
         print(" ".join(map(str, values)))
     else:
         with open(path, "w", encoding="utf-8") as file:
             file.write(" ".join(map(str, values)) + "\n")
 
+
 def fill_array(count, low, high, seed, output_path):
-    #Создает случайный массив и записывает его в файл
+    """Создает случайный массив и записывает его в файл"""
     try:
-        numbers=generate_array(count, low, high, seed)
+        numbers = generate_array(count, low, high, seed)
         write_array(numbers, output_path)
-    except(ValueError, OSError) as error:
-        print(f"Ошибка:{error}", file=sys.stderr)
+
+    except (ValueError, OSError) as error:
+        print(f"Ошибка: {error}", file=sys.stderr)
         return 1
+
     return 0
 
-def sort_array(input_path, output_path, method, descending=False):
-    #Читает массив, сортирует его и записывает результат
+
+def sort_array(input_path, output_path, method,
+               descending=False, show_time=False):
+    """Читает массив, сортирует его и записывает результат"""
     try:
-        numbers=read_array(input_path)
-        sorting_function=METHODS[method]
-        sorting_function(numbers, descending)
-        write_array(numbers, output_path)
-    except(ValueError, OSError, KeyError) as error:
-            print(f"Ошибка:{error}", file=sys.stderr)
-            return 1
+        numbers = read_array(input_path)
+        sorting_function = METHODS[method]
+
+        if show_time:
+            start_time = time.perf_counter()
+
+            sorting_function(numbers, descending)
+
+            end_time = time.perf_counter()
+
+            elapsed_time = end_time - start_time
+            print(
+                f"Время сортировки {method}: "
+                f"{elapsed_time:.6f} секунд"
+            )
+        else:
+            sorting_function(numbers, descending)
+
+        write_array(
+            numbers,
+            output_path,
+            "Отсортированный массив"
+        )
+
+    except (ValueError, OSError, KeyError) as error:
+        print(f"Ошибка: {error}", file=sys.stderr)
+        return 1
+
     return 0
 
-def search_array(input_path, target):
-    #Ищет число в массиве и возвращает его значение
+
+def search_array(input_path, target, show_index=False):
+    """Ищет число в массиве"""
     try:
-        numbers=read_array(input_path)
-        index=binary_search(numbers, target)
+        numbers = read_array(input_path)
+
+        index = binary_search(numbers, target)
+
         if index is not None:
+            if show_index:
+                return index + 1
+
             return numbers[index]
+
         return None
-    except(ValueError, OSError) as error:
-            print(f"Ошибка:{error}", file=sys.stderr)
-            raise SystemExit(1)
+
+    except (ValueError, OSError) as error:
+        print(f"Ошибка: {error}", file=sys.stderr)
+        raise SystemExit(1)
+
 
 def main():
     parser = argparse.ArgumentParser(
@@ -140,11 +185,21 @@ def main():
         required=True
     )
 
-    #Команда fill
+    # Команда fill
     fill_parser = subparsers.add_parser("fill")
     fill_parser.add_argument("-c", "--count", type=int)
-    fill_parser.add_argument("--min", dest="low", type=int)
-    fill_parser.add_argument("--max", dest="high", type=int)
+    fill_parser.add_argument(
+        "--min",
+        dest="low",
+        type=int,
+        default=-100
+    )
+    fill_parser.add_argument(
+        "--max",
+        dest="high",
+        type=int,
+        default=100
+    )
     fill_parser.add_argument("--seed", type=int)
     fill_parser.add_argument("-o", "--output", type=str)
 
@@ -152,17 +207,42 @@ def main():
     sort_parser = subparsers.add_parser("sort")
     sort_parser.add_argument("-i", "--input")
     sort_parser.add_argument("-o", "--output")
-    sort_parser.add_argument("-m", "--method", choices=sorted(METHODS), required=True)
+    sort_parser.add_argument(
+        "-m",
+        "--method",
+        choices=sorted(METHODS),
+        required=True
+    )
     sort_parser.add_argument(
         "--order",
         choices=["asc", "desc"],
         default="asc"
     )
+    sort_parser.add_argument(
+        "--time",
+        action="store_true",
+        help="Показать время сортировки"
+    )
 
     # Команда search
     search_parser = subparsers.add_parser("search")
-    search_parser.add_argument("-i", "--input", type=str, required=True)
-    search_parser.add_argument("-v", "--target", type=int, required=True)
+    search_parser.add_argument(
+        "-i",
+        "--input",
+        type=str,
+        required=True
+    )
+    search_parser.add_argument(
+        "-v",
+        "--target",
+        type=int,
+        required=True
+    )
+    search_parser.add_argument(
+        "--index",
+        action="store_true",
+        help="Показать позицию найденного числа"
+    )
 
     args = parser.parse_args()
 
@@ -174,7 +254,7 @@ def main():
             args.high,
             args.seed,
             args.output
-            )
+        )
         raise SystemExit(exit_code)
 
     # Обработка команды sort
@@ -183,22 +263,36 @@ def main():
             args.input,
             args.output,
             args.method,
-            args.order == "desc"
+            args.order == "desc",
+            args.time
         )
         raise SystemExit(exit_code)
-    
-    # Oбработка команды search
+
+    # Обработка команды search
     elif args.command == "search":
-        result = search_array(args.input, args.target)
+        result = search_array(
+            args.input,
+            args.target,
+            args.index
+        )
+
         if result is None:
             print("Число не найдено")
             raise SystemExit(1)
-        print(result)
+
+        if args.index:
+            print("Позиция числа:", result)
+        else:
+            print("Найденное число:", result)
 
     # Обработка команды solve
     elif args.command == "solve":
         try:
-            result = equation.solve_equation(args.a, args.b, args.c)
+            result = equation.solve_equation(
+                args.a,
+                args.b,
+                args.c
+            )
 
             print("Тип уравнения:", result["Тип уравнения"])
 
@@ -221,16 +315,16 @@ def main():
                 with open(args.input, "r", encoding="utf-8") as source:
                     numbers = stats.read_numbers(source)
             else:
-                numbers=[]
+                numbers = []
+
                 while True:
-                    line=input()
-                    if line=='':
+                    line = input()
+
+                    if line == "":
                         break
+
                     for i in line.split():
                         numbers.append(int(i))
-                    
-                # import sys
-                # numbers = stats.read_numbers(sys.stdin)
 
             print_statistics = stats.calculate_all(numbers)
 
@@ -265,7 +359,9 @@ def main():
     # Обработка команды integrate
     elif args.command == "integrate":
         try:
-            function, formula, low, high, strict = integrate.FORMULAS[args.func]
+            function, formula, low, high, strict = (
+                integrate.FORMULAS[args.func]
+            )
 
             integrate.check_limits(
                 args.start,
