@@ -150,7 +150,11 @@ def main():
     sort_parser.add_argument("-i", "--input", type=str, required=True)
     sort_parser.add_argument("-o", "--output", type=str, required=True)
     sort_parser.add_argument("-m", "--method", choices=sorted(METHODS), required=True)
-    sort_parser.add_argument("--descending", action="store_true")
+    sort_parser.add_argument(
+        "--order",
+        choices=["asc", "desc"],
+        default="asc"
+    )
 
     # Команда search
     search_parser = subparsers.add_parser("search")
@@ -176,7 +180,7 @@ def main():
             args.input,
             args.output,
             args.method,
-            args.descending
+            args.order == "desc"
         )
         raise SystemExit(exit_code)
     

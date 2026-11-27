@@ -45,7 +45,3 @@ def binary_search(values, target):
         else:
             right=middle-1
     return None
-
-numbers=[1, 3, 5, 7, 9, 11, 13]
-print(binary_search(numbers, 7))
-print(binary_search(numbers, 6))
