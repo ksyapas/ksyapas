@@ -6,6 +6,7 @@ def before(a, b, descending=False):
     else:
         return a < b
 
+#Сортирровка пузырьком
 def bubble_sort(values, descending=False):
     n = len(values)
     for i in range(n - 1):
@@ -13,6 +14,7 @@ def bubble_sort(values, descending=False):
             if before(values[j + 1], values[j], descending):
                 values[j], values[j + 1] = values[j + 1], values[j]
 
+#Сортировка выбором
 def selection_sort(values, descending=False):
     n = len(values)
     for i in range(n - 1):
@@ -24,6 +26,7 @@ def selection_sort(values, descending=False):
 
         values[i], values[selected] = values[selected], values[i]
 
+#Сортировка вставками
 def insertion_sort(values, descending=False):
     n = len(values)
     for i in range(1, n):
@@ -34,6 +37,7 @@ def insertion_sort(values, descending=False):
             j -= 1
         values[j + 1] = key
 
+#Сортировка подсчетом
 def counting_sort(values, descending=False):
     counts = [0] * (MAX_VALUE - MIN_VALUE + 1)
     for number in values:
@@ -51,6 +55,7 @@ def counting_sort(values, descending=False):
             values[index] = number
             index += 1
 
+#Быстрая сортировка
 def quick(values, descending=False):
     _quick_sort(values, 0, len(values) - 1, descending)
 
@@ -81,7 +86,8 @@ def _quick_sort(values, left, right, descending):
             if i < right:
                 _quick_sort(values, i, right, descending)
             right = j
-        
+
+#Сортировка слиянием     
 def merge(values, descending=False):
     _merge_sort(values, 0, len(values) - 1, descending)
 
@@ -120,6 +126,7 @@ def _merge(values, left, middle, right, descending):
 
     values[left:right + 1] = result
 
+#Пирамидальная сортировка
 def heap(values, descending=False):
     n = len(values)
 

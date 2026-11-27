@@ -42,9 +42,12 @@ def read_array(path=None):
 
 def write_array(values, path):
     """Записывает массив целых чисел в файл"""
-    text=" ".join(str(x) for x in values)+"\n"
-    with open(path, "w", encoding="utf-8") as file:
-        file.write(text)
+    if path is None:
+        print("Отсортированный массив:")
+        print(" ".join(map(str, values)))
+    else:
+        with open(path, "w", encoding="utf-8") as file:
+            file.write(" ".join(map(str, values)) + "\n")
 
 def fill_array(count, low, high, seed, output_path):
     #Создает случайный массив и записывает его в файл
@@ -139,16 +142,16 @@ def main():
 
     #Команда fill
     fill_parser = subparsers.add_parser("fill")
-    fill_parser.add_argument("-c", "--count", type=int, required=True)
-    fill_parser.add_argument("--min", dest="low", type=int, required=True)
-    fill_parser.add_argument("--max", dest="high", type=int, required=True)
+    fill_parser.add_argument("-c", "--count", type=int)
+    fill_parser.add_argument("--min", dest="low", type=int)
+    fill_parser.add_argument("--max", dest="high", type=int)
     fill_parser.add_argument("--seed", type=int)
-    fill_parser.add_argument("-o", "--output", type=str, required=True)
+    fill_parser.add_argument("-o", "--output", type=str)
 
     # Команда sort
     sort_parser = subparsers.add_parser("sort")
-    sort_parser.add_argument("-i", "--input", type=str, required=True)
-    sort_parser.add_argument("-o", "--output", type=str, required=True)
+    sort_parser.add_argument("-i", "--input")
+    sort_parser.add_argument("-o", "--output")
     sort_parser.add_argument("-m", "--method", choices=sorted(METHODS), required=True)
     sort_parser.add_argument(
         "--order",
